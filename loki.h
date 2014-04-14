@@ -18,9 +18,10 @@
 #define PATTERN5 "\x2d\xe9\xf0\x4f\xad\xf5\x21\x7d"
 #define PATTERN6 "\x2d\xe9\xf0\x4f\xf3\xb0\x05\x46"
 
-#define ABOOT_BASE_SAMSUNG 0x88dfffd8
-#define ABOOT_BASE_LG 0x88efffd8
-#define ABOOT_BASE_G2 0xf7fffd8
+#define ABOOT_BASE_SAMSUNG 	0x88dfffd8
+#define ABOOT_BASE_LG 		0x88efffd8
+#define ABOOT_BASE_G2 		0xf7fffd8
+#define ABOOT_BASE_LS840 	0x400FFD8
 
 struct boot_img_hdr {
     unsigned char magic[BOOT_MAGIC_SIZE];
