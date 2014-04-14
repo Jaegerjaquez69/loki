@@ -116,6 +116,15 @@ struct target targets[] = {
 		.hdr = 0x88f68194,
 		.lg = 1,
 	},
+	//device research needed.
+        {
+                .vendor = "Sprint",
+                .device = "LG Viper",
+                .build = "ZVI.IMM76D, ZVK?",
+                .check_sigs = 0x88f0e634,
+                .hdr = 0x88f68194,
+                .lg = 1,
+        },
 	{
 		.vendor = "MetroPCS",
 		.device = "LG Motion",
