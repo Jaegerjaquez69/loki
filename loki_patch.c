@@ -121,9 +121,8 @@ struct target targets[] = {
                 .vendor = "Sprint",
                 .device = "LG Viper",
                 .build = "LS840ZVI, LS840ZVK",
-                //.check_sigs = 0x88f0fe18, //if base = lg
-		.check_sigs = 0x4010fe18, //if base = ls840
-                .hdr = 0x88f68194, //from lg spirt, current unkown. PLEASE HELP!
+		.check_sigs = 0x4010fe18,
+                .hdr = 0x40194198,
                 .lg = 1,
         },
 	{
@@ -509,6 +508,7 @@ int loki_patch(const char* partition_label, const char* aboot_image, const char*
 	tgt = NULL;
 
 	for (i = 0; i < (sizeof(targets)/sizeof(targets[0])); i++) {
+		printf("%x :: %x\n", target, &targets[i]);
 		if (targets[i].check_sigs == target) {
 			tgt = &targets[i];
 			break;
