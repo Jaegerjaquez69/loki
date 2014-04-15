@@ -472,7 +472,7 @@ int loki_patch(const char* partition_label, const char* aboot_image, const char*
 
 		if (!memcmp(ptr, PATTERN4, 8)) {
 
-			aboot_base = ABOOT_BASE_LG;
+			aboot_base = ABOOT_BASE_LS840; //till we can better ingegrate with loki
 			target = (unsigned long)ptr - (unsigned long)aboot + aboot_base;
 			break;
 		}
@@ -508,7 +508,6 @@ int loki_patch(const char* partition_label, const char* aboot_image, const char*
 	tgt = NULL;
 
 	for (i = 0; i < (sizeof(targets)/sizeof(targets[0])); i++) {
-		printf("%x :: %x\n", target, &targets[i]);
 		if (targets[i].check_sigs == target) {
 			tgt = &targets[i];
 			break;
