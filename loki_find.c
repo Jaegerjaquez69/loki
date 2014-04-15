@@ -10,10 +10,8 @@
 #define BOOT_PATTERN2 "\x2d\xe9\xf0\x4f\xad\xf5\x82\x5d"	/* LG */
 #define BOOT_PATTERN3 "\x2d\xe9\xf0\x4f\x4f\xf4\x70\x40"	/* LG */
 #define BOOT_PATTERN4 "\x2d\xe9\xf0\x4f\xad\xf5\x80\x5d"	/* LG G2 */
-//Searched for the boot pattern of other lg devices did not find.
-//So trial and error from here on.
+//Finds correct check_sig for LG motion and possibly others, viper unkown.
 #define BOOT_PATTERN5 "\x2d\xe9\xf0\x4f\xad\xf5\x23\x7d"	/* LG LS840 & MS770 */
-//#define BOOT_PATTERN5 "\x2d\xe9\xf0\x4f\xad\xf5\x07\x7d"
 
 int loki_find(const char* aboot_image)
 {
