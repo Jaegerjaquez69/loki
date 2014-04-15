@@ -120,9 +120,10 @@ struct target targets[] = {
         {
                 .vendor = "Sprint",
                 .device = "LG Viper",
-                .build = "ZVI.IMM76D, ZVK?",
-                .check_sigs = 0x88f0e634,
-                .hdr = 0x88f68194,
+                .build = "LS840ZVI, LS840ZVK",
+                //.check_sigs = 0x88f0fe18, //if base = lg
+		.check_sigs = 0x4010fe18, //if base = ls840
+                .hdr = 0x88f68194, //from lg spirt, current unkown. PLEASE HELP!
                 .lg = 1,
         },
 	{

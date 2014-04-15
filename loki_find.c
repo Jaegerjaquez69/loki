@@ -10,6 +10,10 @@
 #define BOOT_PATTERN2 "\x2d\xe9\xf0\x4f\xad\xf5\x82\x5d"	/* LG */
 #define BOOT_PATTERN3 "\x2d\xe9\xf0\x4f\x4f\xf4\x70\x40"	/* LG */
 #define BOOT_PATTERN4 "\x2d\xe9\xf0\x4f\xad\xf5\x80\x5d"	/* LG G2 */
+//Searched for the boot pattern of other lg devices did not find.
+//So trial and error from here on.
+#define BOOT_PATTERN5 "\x2d\xe9\xf0\x4f\xad\xf5\x23\x7d"	/* LG LS840 & MS770 */
+//#define BOOT_PATTERN5 "\x2d\xe9\xf0\x4f\xad\xf5\x07\x7d"
 
 int loki_find(const char* aboot_image)
 {
@@ -39,6 +43,7 @@ int loki_find(const char* aboot_image)
 
 	/* Do a pass to find signature checking function */
 	for (ptr = aboot; ptr < aboot + st.st_size - 0x1000; ptr++) {
+		//printf("patern = %x\n", (int)ptr);
 		if (!memcmp(ptr, PATTERN1, 8) ||
 			!memcmp(ptr, PATTERN2, 8) ||
 			!memcmp(ptr, PATTERN3, 8)) {
@@ -48,9 +53,10 @@ int loki_find(const char* aboot_image)
 			break;
 		}
 
-		if (!memcmp(ptr, PATTERN4, 8)) {
-
-			aboot_base = ABOOT_BASE_LG;
+		if (!memcmp(ptr, PATTERN4, 8)) { //ls840 boot pattern
+                        printf("DEBUG: found LG PATTERN4\n");
+			aboot_base = ABOOT_BASE_LS840; //set to ls840 base
+			//aboot_base = ABOOT_BASE_LG;
 			check_sigs = (unsigned long)ptr - (unsigned long)aboot + aboot_base;
 			break;
 		}
@@ -64,6 +70,7 @@ int loki_find(const char* aboot_image)
 
 		if (!memcmp(ptr, PATTERN6, 8)) {
 
+			printf("it was found LG PATTERN6\n"); //pattern is 4
 			aboot_base = ABOOT_BASE_LG;
 			check_sigs = (unsigned long)ptr - (unsigned long)aboot + aboot_base;
 
@@ -71,7 +78,6 @@ int loki_find(const char* aboot_image)
 			continue;
 		}
 	}
-
 	if (!check_sigs) {
 		printf("[-] Could not find signature checking function.\n");
 		return 1;
@@ -86,7 +92,8 @@ int loki_find(const char* aboot_image)
 		if (!memcmp(ptr, BOOT_PATTERN1, 8) ||
 			!memcmp(ptr, BOOT_PATTERN2, 8) ||
 			!memcmp(ptr, BOOT_PATTERN3, 8) ||
-			!memcmp(ptr, BOOT_PATTERN4, 8)) {
+			!memcmp(ptr, BOOT_PATTERN4, 8) ||
+			!memcmp(ptr, BOOT_PATTERN5, 8)) {
 
 			boot_mmc = (unsigned long)ptr - (unsigned long)aboot + aboot_base;
 			break;

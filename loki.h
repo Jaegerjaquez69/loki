@@ -21,7 +21,10 @@
 #define ABOOT_BASE_SAMSUNG 	0x88dfffd8
 #define ABOOT_BASE_LG 		0x88efffd8
 #define ABOOT_BASE_G2 		0xf7fffd8
-#define ABOOT_BASE_LS840 	0x400FFD8
+//Please don't laugh! I'm not good at RE!
+//I took the last byte of the first offset reversed it and then subtracted 0x28
+//I'm not sure if this is correct but it is what the aboot gives me based on this formula
+#define ABOOT_BASE_LS840	0x400fffd8
 
 struct boot_img_hdr {
     unsigned char magic[BOOT_MAGIC_SIZE];
